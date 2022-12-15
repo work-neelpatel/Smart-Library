@@ -1,0 +1,8 @@
+Com port selection from page
+Always Connected with college student database
+make stock pages of book
+make application faster
+create progress bar on page load for scanning rfid
+maintain multiple copies of books
+add admin name in request book and suggest book  and add book table
+if load page with query string then change border of its target

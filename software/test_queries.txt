@@ -1,0 +1,33 @@
+SELECT b.RFID, b.bname, COUNT(*) as num_authors,
+       STRING_AGG(author, ', ') as authors
+FROM ba_connection ba JOIN
+     book b
+     ON ba.RFID = b.RFID
+GROUP BY b.RFID, b.bname
+HAVING COUNT(*) > 2
+
+
+SELECT ba.author, a.aname AS author_name, b.bname
+FROM 
+    ba_connection ba JOIN book b ON ba.RFID = b.RFID
+    JOIN author a ON ba.author = a.id
+WHERE
+    b.RFID IN (SELECT c.RFID
+                    FROM ba_connection c
+                    GROUP BY c.RFID
+                    HAVING count(c.RFID) >= 2)
+
+select (select id from author where id=1), * from author
+
+SELECT distinct(a.aname)
+FROM     ba_connection AS ba INNER JOIN
+                  author AS a ON ba.author = a.id INNER JOIN
+                  book AS b ON ba.RFID = '9D0A53D3'
+
+
+select * from (SELECT DISTINCT a.aname, DENSE_RANK() over (order by aname)AS row
+FROM     ba_connection AS ba INNER JOIN
+                  author AS a ON ba.author = a.id INNER JOIN
+                  book AS b ON ba.RFID = '9D0A53D3' ) tab1 where tab1.row=2
+
+

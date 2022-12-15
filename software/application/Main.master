@@ -1,0 +1,124 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Main.master.cs" Inherits="Main" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="shortcut icon" type="image/png" href="assets/img/favicon.ico">
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <asp:ContentPlaceHolder id="head" runat="server">
+        </asp:ContentPlaceHolder>
+        <script>
+            function limit(element, max) {
+                var max_chars = max;
+
+                if (element.value.length > max_chars) {
+                    element.value = element.value.substr(0, max_chars);
+                }
+            }
+        </script>
+</head>
+<body class="sb-nav-fixed">
+    
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="Dashboard.aspx"><img src="assets/img/ljcca-logo.png" width="20%"><span class="ml-3 text-lg">LJ Smart Library</span></a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fa fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 nav-link border rounded-top border-secondary">
+                <asp:ContentPlaceHolder id="TopIconbar" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <!-- Navbar-->
+            <ul class="navbar-nav ml-auto ml-md-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-fw"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right mt-3" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="Activity-Log.aspx"><i class="fa fa-list mr-2 text-secondary"></i>Activity Log</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="Settings.aspx"><i class="fa fa-cogs mr-2 text-secondary"></i>Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="Login.aspx"><i class="fa fa-sign-out text-secondary mr-2"></i>Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="collapsed sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" href="Dashboard.aspx">
+                                <div class="sb-nav-link-icon"><i class="fa fa-home "></i></div>
+                                Dashboard
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Profile</div>
+                            <a class="nav-link" href="Books.aspx">
+                                <div class="sb-nav-link-icon"><i class="fa fa-book "></i></div>
+                                Books
+                            </a>
+                            <a class="nav-link" href="Students.aspx">
+                                <div class="sb-nav-link-icon"><i class="fa fa-graduation-cap "></i></div>
+                                Students
+                            </a>
+                        <div class="sb-sidenav-menu-heading">Transactions</div>
+                            <a class="nav-link" href="Book-on-Read.aspx">
+                                <div class="sb-nav-link-icon"><i class="fa fa-building"></i></div>
+                                Book on Read
+                            </a>
+                            <a class="nav-link" href="Issue-Book.aspx">
+                                <div class="sb-nav-link-icon"><i class="fa fa-arrow-circle-left "></i></div>
+                                Book Issue
+                            </a>
+                            <a class="nav-link" href="Return-Book.aspx">
+                                <div class="sb-nav-link-icon"><i class="fa fa-arrow-circle-right "></i></div>
+                                Book Return
+                            </a>
+                            <a class="nav-link" href="Pending-Books.aspx">
+                                <div class="sb-nav-link-icon"><i class="fa fa-sign-in "></i></div>
+                                Pending Books
+                            </a>
+                            <a class="nav-link" href="Transaction-History.aspx">
+                                <div class="sb-nav-link-icon"><i class="fa fa-history "></i></div>
+                                History
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        <asp:Label ID="AdminName" runat="server"></asp:Label>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <form id="form1" runat="server">
+                        <asp:ContentPlaceHolder id="body" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </form>
+                </main>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
+    </body>
+</html>
